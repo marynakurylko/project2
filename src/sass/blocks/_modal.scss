@@ -1,0 +1,47 @@
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: rgba(0, 0, 0, .56);
+    //opacity: 0.56; - так не делать, иначе все внутри этого блока будет прозрачным. Нужно делать через c
+}
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 380px;
+    min-height: 400px;
+    background-color: #F2F2F2;
+    padding: 38px 40px 40px 40px;
+    &__close {
+        position: absolute;
+        top: 0;
+        right: -35px;
+        font-size: 41px;
+        line-height: 21px;
+        color: $main-color;
+        cursor: pointer;
+    }
+    &__subtitle {
+        color: #0D0D0D;
+        font-weight: 700;
+        font-size: 18px;
+        text-align: center;
+    }
+    &__descr {
+        color: #0D0D0D;
+        font-weight: 500;
+        font-size: 14px;
+        text-align: center;
+    }
+    &_mini {
+        min-height: 140px;
+    }
+}
+
+#consultation, #order, #thanks {
+    display: none;
+}
