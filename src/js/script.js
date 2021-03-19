@@ -69,10 +69,62 @@ $(document).ready(function() {
         $(this).on('click', function() {
             $('#order .modal__descr').text($('.catalog-item__subtitle').eq(i).text());
             $('.overlay, #order').fadeIn('slow');
-        })
+        });
     });
 
+    $('#consultation-form').validate();
+    $('#consultation form').validate({
+        rules: {
+            name: "reguired",
+            phone: "reguired",
+            email: {
+                reguired: true,
+                email: true
+            }
+        },
+        messages: {
+            name: "Please specify your name",
+            phone: "Enter your phone number please",
+            email: {
+              required: "We need your email address to contact you",
+              email: "Your email address must be in the format of name@domain.com"
+            }
+        }
+    });
 
+    $('#order form').validate();
+
+    $('form').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "mailer/smart.php",
+            data: $(this).serialize()
+        }).done(function() {
+            $(this).find("input").val("");
+            $('#consultation, #order').fadeOut();
+            $('.overlay, #thanks').fadeIn('slow');
+
+            $('form').trigger('reset');
+        });
+        return false; 
+    });
+
+    // smooth scroll and page up
+
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 1600) {
+            $('.pageup').fadeIn();
+        } else {
+            $('.pageup').fadeOut();
+        }
+    });
+
+    $("a[href^='#']").click(function(){
+        const _href = $(this).attr("href");
+        $("html, body").animate({scrollTop: $(_href).offset().top+"px"});
+        return false;
+    });
 });
 
 
